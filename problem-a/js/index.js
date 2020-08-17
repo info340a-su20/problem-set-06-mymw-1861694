@@ -33,8 +33,15 @@ const EXAMPLE_SEARCH_RESULTS = {results:[{
 //
 //You can test this function by passing it one of the above array items
 //(e.g., `EXAMPLE_SEARCH_RESULTS.results[0]).
-
-
+function renderTrack(singleSong) {
+  let records = document.querySelector('#records');
+  let img = document.createElement('img');
+  img.src = singleSong.artworkUrl100;
+  img.alt = singleSong.trackName;
+  img.title = singleSong.trackName;
+  records.appendChild(img);
+}
+renderTrack(EXAMPLE_SEARCH_RESULTS.results[0]);
 
 //Define a function `renderSearchResults()` that takes in an object with a
 //`results` property containing an array of music tracks; the same format as
@@ -44,8 +51,12 @@ const EXAMPLE_SEARCH_RESULTS = {results:[{
 //"clear" the previously displayed results first!
 //
 //You can test this function by passing it the `EXAMPLE_SEARCH_RESULTS` object.
-
-
+function renderSearchResults(objResults) {
+  //objResults.innerHTML = "";
+  renderTrack(objResults.results[1]);
+  //objResults.forEach(renderTrack(objResults.results));
+}
+renderSearchResults(EXAMPLE_SEARCH_RESULTS);
 
 //Now it's the time to practice using `fetch()`! First, modify the `index.html`
 //file to load the polyfills for _BOTH_ the fetch() function and Promises, so
