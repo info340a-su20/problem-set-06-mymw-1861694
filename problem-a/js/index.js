@@ -41,7 +41,7 @@ function renderTrack(singleSong) {
   img.title = singleSong.trackName;
   records.appendChild(img);
 }
-renderTrack(EXAMPLE_SEARCH_RESULTS.results[0]);
+//renderTrack(EXAMPLE_SEARCH_RESULTS.results[0]);
 
 //Define a function `renderSearchResults()` that takes in an object with a
 //`results` property containing an array of music tracks; the same format as
@@ -52,11 +52,13 @@ renderTrack(EXAMPLE_SEARCH_RESULTS.results[0]);
 //
 //You can test this function by passing it the `EXAMPLE_SEARCH_RESULTS` object.
 function renderSearchResults(objResults) {
-  //objResults.innerHTML = "";
-  renderTrack(objResults.results[1]);
-  //objResults.forEach(renderTrack(objResults.results));
+  let records = document.querySelector('#records');
+  records.innerHTML = "";
+  for (let i = 0; i < objResults.results.length; i++) {
+    renderTrack(objResults.results[i]); 
+  }
 }
-renderSearchResults(EXAMPLE_SEARCH_RESULTS);
+//renderSearchResults(EXAMPLE_SEARCH_RESULTS);
 
 //Now it's the time to practice using `fetch()`! First, modify the `index.html`
 //file to load the polyfills for _BOTH_ the fetch() function and Promises, so
@@ -80,6 +82,9 @@ renderSearchResults(EXAMPLE_SEARCH_RESULTS);
 //your favorite band (you CANNOT test it with the search button yet!)
 const URL_TEMPLATE = "https://itunes.apple.com/search?entity=song&limit=25&term={searchTerm}";
 
+function fetchTrackList(searchTerm) {
+  
+}
 
 
 
