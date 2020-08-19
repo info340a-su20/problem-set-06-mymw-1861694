@@ -54,10 +54,14 @@ function renderTrack(singleSong) {
 function renderSearchResults(objResults) {
   let records = document.querySelector('#records');
   records.innerHTML = "";
+  if (objResults.results.length == 0) {
+    renderError(new Error("No results found"));
+  }
   for (let i = 0; i < objResults.results.length; i++) {
     renderTrack(objResults.results[i]); 
   }
 }
+
 //renderSearchResults(EXAMPLE_SEARCH_RESULTS);
 
 //Now it's the time to practice using `fetch()`! First, modify the `index.html`
@@ -83,23 +87,43 @@ function renderSearchResults(objResults) {
 const URL_TEMPLATE = "https://itunes.apple.com/search?entity=song&limit=25&term={searchTerm}";
 
 function fetchTrackList(searchTerm) {
-  
+  return fetch("https://itunes.apple.com/search?entity=song&limit=25&term={" + searchTerm + "}")
+  .then(function(response) {
+    return response.json();  
+  })
+  .then(function(newResponse) {
+    return renderSearchResults(newResponse);
+  })
+  .catch(function(error) {
+    renderError(error);
+  })
 }
 
+//console.log(fetchTrackList("Hot chelle Rae"));
 
 
 //Add an event listener to the "search" button so that when it is clicked (and 
 //the the form is submitted) your `fetchTrackList()` function is called with the
 //user-entered `#searchQuery` value. Use the `preventDefault()` function to keep
 //the form from being submitted as usual (and navigating to a different page).
-
+let search = document.querySelector('button');
+search.addEventListener('click', function(reaction) {
+  reaction.preventDefault();
+  fetchTrackList('#searchQuery');
+})
 
 
 //Next, add some error handling to the page. Define a function `renderError()`
 //that takes in an "Error object" and displays that object's `message` property
 //on the page. Display this by creating a `<p class="alert alert-danger">` and
 //placing that alert inside the `#records` element.
-
+function renderError(errorObj) {
+  let p = document.createElement('p');
+  p.classList.add('alert', 'alert-danger');
+  let records = document.querySelector('#records');
+  p.textContent = errorObj.message;
+  records.appendChild(p);
+}
 
 
 //Add the error handing to your program in two ways:
