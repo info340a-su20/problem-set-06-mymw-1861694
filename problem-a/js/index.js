@@ -112,7 +112,7 @@ let search = document.querySelector('button');
 search.addEventListener('click', function(reaction) {
   reaction.preventDefault();
   let userSearch = document.querySelector('#searchQuery');
-  fetchTrackList(userSearch);
+  fetchTrackList(userSearch.value);
 })
 
 
