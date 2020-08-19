@@ -84,11 +84,11 @@ function renderSearchResults(objResults) {
 //
 //You can test this function by calling the method and passing it the name of 
 //your favorite band (you CANNOT test it with the search button yet!)
-//const URL_TEMPLATE = "https://itunes.apple.com/search?entity=song&limit=25&term={searchTerm}";
+const URL_TEMPLATE = "https://itunes.apple.com/search?entity=song&limit=25&term={searchTerm}";
 
 function fetchTrackList(searchTerm) {
   togglerSpinner();
-  return fetch("https://itunes.apple.com/search?entity=song&limit=25&term={" + searchTerm + "}")
+  return fetch(URL_TEMPLATE.replace("searchTerm", searchTerm))
   .then(function(response) {
     return response.json();  
   })
