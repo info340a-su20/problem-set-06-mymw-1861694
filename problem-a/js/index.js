@@ -40,6 +40,7 @@ function renderTrack(singleSong) {
   img.alt = singleSong.trackName;
   img.title = singleSong.trackName;
   records.appendChild(img);
+  img.addEventListener('click', playTrackPreview);
 }
 //renderTrack(EXAMPLE_SEARCH_RESULTS.results[0]);
 
@@ -61,7 +62,6 @@ function renderSearchResults(objResults) {
     renderTrack(objResults.results[i]); 
   }
 }
-
 //renderSearchResults(EXAMPLE_SEARCH_RESULTS);
 
 //Now it's the time to practice using `fetch()`! First, modify the `index.html`
@@ -87,6 +87,7 @@ function renderSearchResults(objResults) {
 const URL_TEMPLATE = "https://itunes.apple.com/search?entity=song&limit=25&term={searchTerm}";
 
 function fetchTrackList(searchTerm) {
+  togglerSpinner();
   return fetch("https://itunes.apple.com/search?entity=song&limit=25&term={" + searchTerm + "}")
   .then(function(response) {
     return response.json();  
@@ -96,6 +97,8 @@ function fetchTrackList(searchTerm) {
   })
   .catch(function(error) {
     renderError(error);
+  }).then(function(){
+    togglerSpinner();
   })
 }
 
@@ -147,7 +150,10 @@ function renderError(errorObj) {
 //spinner (show it) BEFORE you send the AJAX request, and toggle it back off
 //after the ENTIRE request is completed (including after any error catching---
 //download the data and `catch()` the error, and `then()` show the spinner.
-
+function togglerSpinner() {
+  let spinner = document.querySelector('.fa-spinner');
+  spinner.classList.toggle('d-none');
+}
 
 
 
