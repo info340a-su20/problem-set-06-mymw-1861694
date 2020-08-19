@@ -40,7 +40,7 @@ function renderTrack(singleSong) {
   img.alt = singleSong.trackName;
   img.title = singleSong.trackName;
   records.appendChild(img);
-  img.addEventListener('click', playTrackPreview);
+  img.addEventListener('click', playTrackPreview(singleSong, img));
 }
 //renderTrack(EXAMPLE_SEARCH_RESULTS.results[0]);
 
