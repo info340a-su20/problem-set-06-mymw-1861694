@@ -101,7 +101,6 @@ function fetchTrackList(searchTerm) {
     togglerSpinner();
   })
 }
-
 //console.log(fetchTrackList("Hot chelle Rae"));
 
 
@@ -112,7 +111,8 @@ function fetchTrackList(searchTerm) {
 let search = document.querySelector('button');
 search.addEventListener('click', function(reaction) {
   reaction.preventDefault();
-  fetchTrackList(searchQuery);
+  let userSearch = document.querySelector('#searchQuery');
+  fetchTrackList(userSearch);
 })
 
 
